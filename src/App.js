@@ -1,9 +1,9 @@
-import React from "react";
-import {BrowserRouter, Navigate, Route, Routes} from 'react-router-dom'
-import styled from "styled-components";
-import Account from "./pages/Account";
-import Home from "./pages/Home";
-import Result from "./pages/Result";
+import React from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import styled from 'styled-components';
+import Account from './pages/Account';
+import Home from './pages/Home';
+import Result from './pages/Result';
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
       </BrowserRouter>
     </Wrapper>
   );
-}
+};
 
 export default App;
 
