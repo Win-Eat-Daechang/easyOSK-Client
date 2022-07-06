@@ -22,4 +22,20 @@ const App = () => {
 
 export default App;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+
+  width: 80vw;
+  min-height: 82vh;
+
+  box-shadow: 0 0 7px 0 rgb(0 0 0 / 8%);
+  background-color: #ffffff;
+  align-items: center;
+  @media screen and (min-width: 1281px) {
+    width: 62vw;
+    min-height: 82vh;
+    box-shadow: ;
+  }
+`;
