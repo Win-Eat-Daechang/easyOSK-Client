@@ -1,5 +1,6 @@
 const COLORS = {
   /* Main Colors */
+  background: '#ffffff',
 
   /* Text Color */
   textHeader: '#303437',
