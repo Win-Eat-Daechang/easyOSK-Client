@@ -27,15 +27,17 @@ const Wrapper = styled.div`
   flex-direction: column;
   border: 1px solid black;
 
-  width: 80vw;
-  min-height: 82vh;
+  width: 100vw;
+  height: 50vh;
+  padding-left: 24px;
+  padding-right: 24px;
 
-  box-shadow: 0 0 7px 0 rgb(0 0 0 / 8%);
-  background-color: #ffffff;
+  /* box-shadow: 0 0 7px 0 rgb(0 0 0 / 8%);
+  background-color: #ffffff; */
   align-items: center;
-  @media screen and (min-width: 1281px) {
+  /* @media screen and (min-width: 1281px) {
     width: 62vw;
     min-height: 82vh;
     box-shadow: ;
-  }
+  } */
 `;

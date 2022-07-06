@@ -30,4 +30,10 @@ export const GlobalStyle = createGlobalStyle`
   button:hover {
     cursor: pointer
   }
+  h1 {
+    font-weight: bold;
+    color: ${COLORS.textHeader};
+    font-size: 24px;
+    margin: 0;
+  }
 `;
