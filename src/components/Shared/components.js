@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export const HeaderContainer = ({ text }) => {
   return (
-    <header>
+    <header style={{ marginTop: '60px' }}>
       <h2>{text}</h2>
     </header>
   );
@@ -17,4 +17,10 @@ export const Circle = styled.div`
   width: 250px;
   background: ${COLORS.iconBackPrimary};
   border-radius: 50%;
+`;
+
+export const MicContainer = styled.section`
+  display: flex;
+  align-self: center;
+  margin-bottom: 84px;
 `;
