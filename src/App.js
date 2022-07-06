@@ -28,13 +28,14 @@ const Wrapper = styled.div`
   border: 1px solid black;
 
   width: 100vw;
-  height: 50vh;
+  height: 100vh;
   padding-left: 24px;
   padding-right: 24px;
 
   /* box-shadow: 0 0 7px 0 rgb(0 0 0 / 8%);
   background-color: #ffffff; */
   align-items: center;
+
   /* @media screen and (min-width: 1281px) {
     width: 62vw;
     min-height: 82vh;

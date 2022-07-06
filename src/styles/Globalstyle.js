@@ -32,6 +32,12 @@ export const GlobalStyle = createGlobalStyle`
   }
   h1 {
     font-weight: bold;
+    color: ${COLORS.textPrimary};
+    font-size: 32px;
+    margin: 0;
+  }
+  h2 {
+    font-weight: bold;
     color: ${COLORS.textHeader};
     font-size: 24px;
     margin: 0;
