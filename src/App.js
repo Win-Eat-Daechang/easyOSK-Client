@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Account from './pages/Account';
@@ -7,8 +7,9 @@ import Menu from './pages/Menu';
 import Result from './pages/Result';
 
 const App = () => {
-  const [shopInput, setShopInput] = useState('');
-  const [menuInput, setMenuInput] = useState('');
+  const initialState = '';
+  const [shopInput, setShopInput] = useState(initialState);
+  const [menuInput, setMenuInput] = useState(initialState);
   return (
     <Wrapper className="App">
       <BrowserRouter>
@@ -55,9 +56,7 @@ const Wrapper = styled.div`
   background-color: #ffffff; */
   align-items: center;
 
-  /* @media screen and (min-width: 1281px) {
-    width: 62vw;
-    min-height: 82vh;
-    box-shadow: ;
-  } */
+  @media screen and (min-width: 1024px) {
+    width: 1024px;
+  }
 `;

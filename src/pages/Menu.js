@@ -1,5 +1,5 @@
 //Home 페이지에서 매장 선택
-import { useState } from 'react';
+// import { useState } from 'react';
 import styled from 'styled-components';
 import {
   DefaultText,

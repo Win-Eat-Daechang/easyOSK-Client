@@ -1,5 +1,5 @@
 //Home 페이지에서 매장 선택
-import { useState } from 'react';
+// import { useState } from 'react';
 import styled from 'styled-components';
 import {
   DefaultText,
@@ -11,30 +11,38 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-import { Link } from 'react-router-dom';
-const Home = ({ shopInput, setShopInput }) => {
-  //음성 인식 부분과 setShopInput 연결 필요
-  setShopInput('버거킹');
+// import { Link } from 'react-router-dom';
+
+import usePayload from '../hooks/usePayload';
+
+const Home = ({ shopInput }) => {
+  const [handleScript, transcript, listening] = usePayload();
+  const handler = () => {
+    handleScript();
+    console.log(transcript);
+    console.log(listening);
+  };
+
   return (
     <HomeContainer>
       <div>
         <HeaderContainer text={'홈'} />
         <SectionContainer style={{ marginTop: '64px' }}>
           <LeftText>
-            <DefaultText>"이용할</DefaultText> <br />
+            <DefaultText>"이용할</DefaultText>
+            <br />
             <DefaultText> 매장을 말해주세요"</DefaultText>
           </LeftText>
-          {shopInput && (
+          {transcript && (
             <RightText>
-              "<RedText>{shopInput}</RedText>"
+              "<RedText>{transcript}</RedText>"
             </RightText>
           )}
         </SectionContainer>
       </div>
-      <MicContainer>
+      <MicContainer onClick={handler}>
         <Mic />
       </MicContainer>
-      <Link to="/menu">메뉴로 이동(디버깅용)</Link>
     </HomeContainer>
   );
 };
