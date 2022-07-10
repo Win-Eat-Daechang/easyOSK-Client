@@ -11,22 +11,24 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-import { Link } from 'react-router-dom';
-const Home = ({ shopInput, setShopInput }) => {
-  //음성 인식 부분과 setShopInput 연결 필요
-  setShopInput('버거킹');
+const Menu = ({ shopInput, menuInput, setMenuInput }) => {
+  //음성 인식 부분과 setMenuInput 연결 필요
+  setMenuInput('와퍼주니어 내놔');
   return (
-    <HomeContainer>
+    <MenuContainer>
       <div>
-        <HeaderContainer text={'홈'} />
+        <HeaderContainer text={'메뉴 선택'} />
         <SectionContainer style={{ marginTop: '64px' }}>
           <LeftText>
-            <DefaultText>"이용할</DefaultText> <br />
-            <DefaultText> 매장을 말해주세요"</DefaultText>
+            <DefaultText>
+              "<RedText>{shopInput}</RedText>에서 이용할
+            </DefaultText>{' '}
+            <br />
+            <DefaultText> 메뉴를 말해주세요"</DefaultText>
           </LeftText>
-          {shopInput && (
+          {menuInput && (
             <RightText>
-              "<RedText>{shopInput}</RedText>"
+              "<RedText>{menuInput}</RedText>"
             </RightText>
           )}
         </SectionContainer>
@@ -34,13 +36,12 @@ const Home = ({ shopInput, setShopInput }) => {
       <MicContainer>
         <Mic />
       </MicContainer>
-      <Link to="/menu">메뉴로 이동(디버깅용)</Link>
-    </HomeContainer>
+    </MenuContainer>
   );
 };
-export default Home;
+export default Menu;
 
-const HomeContainer = styled.div`
+const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
