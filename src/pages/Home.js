@@ -11,8 +11,10 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-const Home = () => {
-  const [voiceInput, setVoiceInput] = useState('버거킹');
+import { Link } from 'react-router-dom';
+const Home = ({ shopInput, setShopInput }) => {
+  //음성 인식 부분과 setShopInput 연결 필요
+  setShopInput('버거킹');
   return (
     <HomeContainer>
       <div>
@@ -22,9 +24,9 @@ const Home = () => {
             <DefaultText>"이용할</DefaultText> <br />
             <DefaultText> 매장을 말해주세요"</DefaultText>
           </LeftText>
-          {voiceInput && (
+          {shopInput && (
             <RightText>
-              "<RedText>{voiceInput}</RedText>"
+              "<RedText>{shopInput}</RedText>"
             </RightText>
           )}
         </SectionContainer>
@@ -32,6 +34,7 @@ const Home = () => {
       <MicContainer>
         <Mic />
       </MicContainer>
+      <Link to="/menu">메뉴로 이동(디버깅용)</Link>
     </HomeContainer>
   );
 };

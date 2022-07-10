@@ -35,6 +35,7 @@ export const LeftText = styled.h1`
 `;
 
 export const RightText = styled.h1`
+  margin-top: 16px;
   display: flex;
   justify-content: right;
   white-space: pre-wrap;

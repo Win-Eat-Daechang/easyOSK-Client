@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Account from './pages/Account';
@@ -7,13 +7,30 @@ import Menu from './pages/Menu';
 import Result from './pages/Result';
 
 const App = () => {
+  const [shopInput, setShopInput] = useState('');
+  const [menuInput, setMenuInput] = useState('');
   return (
     <Wrapper className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/result" element={<Result />} />
+          <Route
+            path="/"
+            element={<Home shopInput={shopInput} setShopInput={setShopInput} />}
+          />
+          <Route
+            path="/menu"
+            element={
+              <Menu
+                shopInput={shopInput}
+                menuInput={menuInput}
+                setMenuInput={setMenuInput}
+              />
+            }
+          />
+          <Route
+            path="/result"
+            element={<Result shopInput={shopInput} menuInput={menuInput} />}
+          />
           <Route path="/account" element={<Account />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
