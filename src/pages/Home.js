@@ -1,15 +1,33 @@
+//Home 페이지에서 매장 선택
+import { useState } from 'react';
 import styled from 'styled-components';
-import { HeaderContainer, MicContainer } from '../components/Shared/components';
+import {
+  DefaultText,
+  HeaderContainer,
+  LeftText,
+  MicContainer,
+  RedText,
+  RightText,
+  SectionContainer,
+} from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
 const Home = () => {
+  const [voiceInput, setVoiceInput] = useState('버거킹');
   return (
     <HomeContainer>
       <div>
         <HeaderContainer text={'홈'} />
-        <section style={{ marginTop: '64px' }}>
-          <h1>"업체명과</h1>
-          <h1>메뉴를 말해주세요"</h1>
-        </section>
+        <SectionContainer style={{ marginTop: '64px' }}>
+          <LeftText>
+            <DefaultText>"이용할</DefaultText> <br />
+            <DefaultText> 매장을 말해주세요"</DefaultText>
+          </LeftText>
+          {voiceInput && (
+            <RightText>
+              "<RedText>{voiceInput}</RedText>"
+            </RightText>
+          )}
+        </SectionContainer>
       </div>
       <MicContainer>
         <Mic />

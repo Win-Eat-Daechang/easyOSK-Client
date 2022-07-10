@@ -1,3 +1,4 @@
+//Menu 페이지에서 메뉴 선택
 import styled from 'styled-components';
 import { HeaderContainer, MicContainer } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';

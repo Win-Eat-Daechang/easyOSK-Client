@@ -9,6 +9,11 @@ export const HeaderContainer = ({ text }) => {
   );
 };
 
+export const SectionContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Circle = styled.div`
   display: flex;
   justify-content: center;
@@ -23,4 +28,20 @@ export const MicContainer = styled.section`
   display: flex;
   align-self: center;
   margin-bottom: 84px;
+`;
+
+export const LeftText = styled.h1`
+  white-space: pre-wrap;
+`;
+
+export const RightText = styled.h1`
+  display: flex;
+  justify-content: right;
+  white-space: pre-wrap;
+`;
+
+export const DefaultText = styled.span``;
+
+export const RedText = styled.span`
+  color: #ff2929;
 `;
