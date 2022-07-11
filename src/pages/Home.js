@@ -15,12 +15,18 @@ import Mic from '../components/Home/Mic';
 
 import usePayload from '../hooks/usePayload';
 
-const Home = ({ shopInput }) => {
+const Home = ({ shopInput, setShopInput, setMenusInShop }) => {
   const [handleScript, transcript, listening] = usePayload();
   const handler = () => {
     handleScript();
     console.log(transcript);
     console.log(listening);
+    if (transcript) {
+      /* 입력 종료 시 */
+      setShopInput(transcript);
+      //매장 정보(shopInput) 넘겨주고 메뉴 정보 받아오는 API 요청
+      //setMenusInShop(받아온 메뉴 list)
+    }
   };
 
   return (

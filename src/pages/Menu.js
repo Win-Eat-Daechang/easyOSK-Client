@@ -11,9 +11,21 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-const Menu = ({ shopInput, menuInput, setMenuInput }) => {
-  //음성 인식 부분과 setMenuInput 연결 필요
-  setMenuInput('와퍼주니어 내놔');
+import usePayload from '../hooks/usePayload';
+
+const Menu = ({ shopInput, menuInput, setMenuInput, setBarcode }) => {
+  const [handleScript, transcript, listening] = usePayload();
+  const handler = () => {
+    handleScript();
+    console.log(transcript);
+    console.log(listening);
+    if (transcript) {
+      /* 입력 종료 시 */
+      setMenuInput(transcript);
+      //매장(shopInput)-메뉴(menuInput) 정보 넘겨주고 바코드 받아오는 API 요청
+      //setBarcode(받아온 바코드)
+    }
+  };
   return (
     <MenuContainer>
       <div>
@@ -22,18 +34,18 @@ const Menu = ({ shopInput, menuInput, setMenuInput }) => {
           <LeftText>
             <DefaultText>
               "<RedText>{shopInput}</RedText>에서 이용할
-            </DefaultText>{' '}
+            </DefaultText>
             <br />
             <DefaultText> 메뉴를 말해주세요"</DefaultText>
           </LeftText>
-          {menuInput && (
+          {transcript && (
             <RightText>
-              "<RedText>{menuInput}</RedText>"
+              "<RedText>{transcript}</RedText>"
             </RightText>
           )}
         </SectionContainer>
       </div>
-      <MicContainer>
+      <MicContainer onClick={handler}>
         <Mic />
       </MicContainer>
     </MenuContainer>
