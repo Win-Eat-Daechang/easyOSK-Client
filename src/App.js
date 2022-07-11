@@ -9,22 +9,32 @@ import Result from './pages/Result';
 const App = () => {
   const initialState = '';
   const [shopInput, setShopInput] = useState(initialState);
+  const [menusInShop, setMenusInShop] = useState([]);
   const [menuInput, setMenuInput] = useState(initialState);
+  const [barcode, setBarcode] = useState(initialState);
   return (
     <Wrapper className="App">
       <BrowserRouter>
         <Routes>
           <Route
             path="/"
-            element={<Home shopInput={shopInput} setShopInput={setShopInput} />}
+            element={
+              <Home
+                shopInput={shopInput}
+                setShopInput={setShopInput}
+                setMenusInShop={setMenusInShop}
+              />
+            }
           />
           <Route
             path="/menu"
             element={
               <Menu
                 shopInput={shopInput}
+                menusInShop={menusInShop}
                 menuInput={menuInput}
                 setMenuInput={setMenuInput}
+                setBarcode={setBarcode}
               />
             }
           />
