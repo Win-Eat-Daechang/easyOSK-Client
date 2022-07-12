@@ -7,11 +7,13 @@ import Menu from './pages/Menu';
 import Result from './pages/Result';
 
 const App = () => {
-  const initialState = '버거킹';
+  const initialState = '';
   const [shopList, setShopList] = useState([]);
   const [shopInput, setShopInput] = useState(initialState);
-  const [menusInShop, setMenusInShop] = useState([]);
+
+  const [menuList, setMenuList] = useState([]);
   const [menuInput, setMenuInput] = useState(initialState);
+
   const [barcode, setBarcode] = useState(initialState);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const App = () => {
                 shopInput={shopInput}
                 shopList={shopList}
                 setShopInput={setShopInput}
-                setMenusInShop={setMenusInShop}
+                setMenusInShop={setMenuList}
               />
             }
           />
@@ -39,8 +41,7 @@ const App = () => {
             element={
               <Menu
                 shopInput={shopInput}
-                menusInShop={menusInShop}
-                menuInput={menuInput}
+                menuList={menuList}
                 setMenuInput={setMenuInput}
                 setBarcode={setBarcode}
               />

@@ -11,21 +11,37 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-import usePayload from '../hooks/usePayload';
 
-const Menu = ({ shopInput, menuInput, setMenuInput, setBarcode }) => {
-  const [handleScript, transcript, listening] = usePayload();
+import { useNavigate } from 'react-router-dom';
+import usePayload from '../hooks/usePayload';
+import speechParse from '../utils/speechParse';
+
+const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
+  const [handleScript, transcript, listening, toggle, resetTranscript] =
+    usePayload();
+  const navigate = useNavigate();
+
   const handler = () => {
     handleScript();
-    console.log(transcript);
+
+    // listening이 true일 때 애니메이션? 진동? 효과
     console.log(listening);
-    if (transcript) {
-      /* 입력 종료 시 */
-      setMenuInput(transcript);
-      //매장(shopInput)-메뉴(menuInput) 정보 넘겨주고 바코드 받아오는 API 요청
-      //setBarcode(받아온 바코드)
+    if (!toggle) {
+      speechParse(menuList, transcript).then(function (res) {
+        setMenuInput(res);
+
+        // barcode set
+        // setBarcode()
+
+        // reset transcript
+        resetTranscript();
+
+        // 다음 page로 navigate
+        navigate('/result');
+      });
     }
   };
+
   return (
     <MenuContainer>
       <div>

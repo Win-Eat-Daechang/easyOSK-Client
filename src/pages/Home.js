@@ -1,5 +1,3 @@
-//Home 페이지에서 매장 선택
-import { useState } from 'react';
 import styled from 'styled-components';
 import {
   DefaultText,
@@ -11,31 +9,33 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-// import { Link } from 'react-router-dom';
 
+import { useNavigate } from 'react-router-dom';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
-import { useEffect } from 'react';
 
-const Home = ({ shopList, setShopInput, setMenusInShop }) => {
-  const [handleScript, transcript, listening, toggle] = usePayload();
-  const [result, setResult] = useState();
-
-  useEffect(() => {
-    setResult(null);
-  }, []);
+const Home = ({ shopList, setShopInput, setMenusInShop: setMenuList }) => {
+  const [handleScript, transcript, listening, toggle, resetTranscript] =
+    usePayload();
+  const navigate = useNavigate();
 
   const handler = () => {
     handleScript();
-    // console.log(transcript);
+
+    // listening이 true일 때 애니메이션? 진동? 효과
     console.log(listening);
     if (!toggle) {
       speechParse(shopList, transcript).then(function (res) {
         setShopInput(res);
-        setResult(res);
 
         // res에 해당하는 메뉴 정보 가져와서 set.
-        setMenusInShop(['menu1', 'menu2', 'menu3']);
+        setMenuList(['menu1', 'menu2', 'menu3']);
+
+        // reset transcript
+        resetTranscript();
+
+        // 다음 page로 navigate
+        navigate('/menu');
       });
     }
   };
@@ -50,22 +50,12 @@ const Home = ({ shopList, setShopInput, setMenusInShop }) => {
             <br />
             <DefaultText> 매장을 말해주세요"</DefaultText>
           </LeftText>
-          {result ? (
-            <RightText>
-              "<RedText>{result}</RedText>"
-            </RightText>
-          ) : (
-            transcript && (
-              <RightText>
-                "<RedText>{transcript}</RedText>"
-              </RightText>
-            )
-          )}
-          {/* {transcript && (
+
+          {transcript && (
             <RightText>
               "<RedText>{transcript}</RedText>"
             </RightText>
-          )} */}
+          )}
         </SectionContainer>
       </div>
       <MicContainer onClick={handler}>
