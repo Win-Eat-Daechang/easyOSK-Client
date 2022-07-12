@@ -21,7 +21,7 @@ function usePayload() {
     setToggle(!toggle);
   };
 
-  return [handleScript, transcript, listening];
+  return [handleScript, transcript, listening, toggle];
 }
 
 export default usePayload;

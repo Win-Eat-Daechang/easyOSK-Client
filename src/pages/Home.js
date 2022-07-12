@@ -1,5 +1,5 @@
 //Home 페이지에서 매장 선택
-// import { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import {
   DefaultText,
@@ -14,18 +14,29 @@ import Mic from '../components/Home/Mic';
 // import { Link } from 'react-router-dom';
 
 import usePayload from '../hooks/usePayload';
+import speechParse from '../utils/speechParse';
+import { useEffect } from 'react';
 
-const Home = ({ shopInput, setShopInput, setMenusInShop }) => {
-  const [handleScript, transcript, listening] = usePayload();
+const Home = ({ shopList, setShopInput, setMenusInShop }) => {
+  const [handleScript, transcript, listening, toggle] = usePayload();
+  const [result, setResult] = useState();
+
+  useEffect(() => {
+    setResult(null);
+  }, []);
+
   const handler = () => {
     handleScript();
-    console.log(transcript);
+    // console.log(transcript);
     console.log(listening);
-    if (transcript) {
-      /* 입력 종료 시 */
-      setShopInput(transcript);
-      //매장 정보(shopInput) 넘겨주고 메뉴 정보 받아오는 API 요청
-      //setMenusInShop(받아온 메뉴 list)
+    if (!toggle) {
+      speechParse(shopList, transcript).then(function (res) {
+        setShopInput(res);
+        setResult(res);
+
+        // res에 해당하는 메뉴 정보 가져와서 set.
+        setMenusInShop(['menu1', 'menu2', 'menu3']);
+      });
     }
   };
 
@@ -39,11 +50,22 @@ const Home = ({ shopInput, setShopInput, setMenusInShop }) => {
             <br />
             <DefaultText> 매장을 말해주세요"</DefaultText>
           </LeftText>
-          {transcript && (
+          {result ? (
+            <RightText>
+              "<RedText>{result}</RedText>"
+            </RightText>
+          ) : (
+            transcript && (
+              <RightText>
+                "<RedText>{transcript}</RedText>"
+              </RightText>
+            )
+          )}
+          {/* {transcript && (
             <RightText>
               "<RedText>{transcript}</RedText>"
             </RightText>
-          )}
+          )} */}
         </SectionContainer>
       </div>
       <MicContainer onClick={handler}>

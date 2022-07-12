@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Account from './pages/Account';
@@ -8,10 +8,17 @@ import Result from './pages/Result';
 
 const App = () => {
   const initialState = '버거킹';
+  const [shopList, setShopList] = useState([]);
   const [shopInput, setShopInput] = useState(initialState);
   const [menusInShop, setMenusInShop] = useState([]);
   const [menuInput, setMenuInput] = useState(initialState);
   const [barcode, setBarcode] = useState(initialState);
+
+  useEffect(() => {
+    // app init 시 사용 가능한 shop list 가져오기
+    setShopList(['버거킹', '서브웨이']);
+  }, []);
+
   return (
     <Wrapper className="App">
       <BrowserRouter>
@@ -21,6 +28,7 @@ const App = () => {
             element={
               <Home
                 shopInput={shopInput}
+                shopList={shopList}
                 setShopInput={setShopInput}
                 setMenusInShop={setMenusInShop}
               />
