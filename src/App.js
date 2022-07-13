@@ -5,10 +5,22 @@ import Account from './pages/Account';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Result from './pages/Result';
+import useAsync from './hooks/useAsync';
+import axios from 'axios';
+import Offline from './pages/Offline';
+
+async function getShopList() {
+  const response = await axios.get('https://www.piuda.cf/stores');
+  console.log(response.data);
+  return response.data;
+}
 
 const App = () => {
   const initialState = '';
-  const [shopList, setShopList] = useState([]);
+  // get shoplist, api call
+  const [shopList, refetch] = useAsync(getShopList, [], false);
+  const { data: SL, error } = shopList;
+
   const [shopInput, setShopInput] = useState(initialState);
 
   const [menuList, setMenuList] = useState([]);
@@ -16,26 +28,25 @@ const App = () => {
 
   const [barcode, setBarcode] = useState(initialState);
 
-  useEffect(() => {
-    // app init 시 사용 가능한 shop list 가져오기
-    setShopList(['버거킹', '서브웨이']);
-  }, []);
-
   return (
     <Wrapper className="App">
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                shopInput={shopInput}
-                shopList={shopList}
-                setShopInput={setShopInput}
-                setMenusInShop={setMenuList}
-              />
-            }
-          />
+          {error ? (
+            <Route path="/" element={<Offline />} />
+          ) : (
+            <Route
+              path="/"
+              element={
+                <Home
+                  shopInput={shopInput}
+                  shopList={shopList}
+                  setShopInput={setShopInput}
+                  setMenusInShop={setMenuList}
+                />
+              }
+            />
+          )}
           <Route
             path="/menu"
             element={
