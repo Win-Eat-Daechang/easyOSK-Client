@@ -9,12 +9,26 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
+import axios from 'axios';
+import useAsync from '../hooks/useAsync';
 
 import { useNavigate } from 'react-router-dom';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
+import { useState } from 'react';
+
+async function getMenuList(id) {
+  const response = await axios.get(`https://www.piuda.cf/stores/${id}`);
+  console.log(response.data);
+  return response.data;
+}
 
 const Home = ({ shopList, setShopInput, setMenusInShop: setMenuList }) => {
+  // get menu list, api call, id가 바뀔때마다 api call.
+  const [id, setId] = useState(0);
+  const [state] = useAsync(() => getMenuList(id), [id]);
+  const { loading, data: menuList, error } = state;
+
   const [handleScript, transcript, listening, toggle, resetTranscript] =
     usePayload();
   const navigate = useNavigate();
@@ -27,9 +41,8 @@ const Home = ({ shopList, setShopInput, setMenusInShop: setMenuList }) => {
     if (!toggle) {
       speechParse(shopList, transcript).then(function (res) {
         setShopInput(res);
-
-        // res에 해당하는 메뉴 정보 가져와서 set.
-        setMenuList(['menu1', 'menu2', 'menu3']);
+        // res에 해당하는 메뉴 정보 가져와서 set. id만 부여하면 자동으로 fetch
+        setId(1);
 
         // reset transcript
         resetTranscript();

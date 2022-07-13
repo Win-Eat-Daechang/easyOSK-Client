@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import Account from './pages/Account';
@@ -18,9 +18,10 @@ async function getShopList() {
 const App = () => {
   const initialState = '';
   // get shoplist, api call
-  const [shopList, refetch] = useAsync(getShopList, [], false);
-  const { data: SL, error } = shopList;
+  const [state] = useAsync(getShopList, [], false);
+  const { data: shopList, error } = state;
 
+  // shopInput = 유저가 선택한 매장
   const [shopInput, setShopInput] = useState(initialState);
 
   const [menuList, setMenuList] = useState([]);

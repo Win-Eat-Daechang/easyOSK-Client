@@ -15,15 +15,19 @@ import Mic from '../components/Home/Mic';
 import { useNavigate } from 'react-router-dom';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
+import { useEffect } from 'react';
 
 const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
   const [handleScript, transcript, listening, toggle, resetTranscript] =
     usePayload();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    console.log(transcript);
+  }, []);
+
   const handler = () => {
     handleScript();
-
     // listening이 true일 때 애니메이션? 진동? 효과
     console.log(listening);
     if (!toggle) {
