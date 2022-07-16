@@ -32,8 +32,7 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
   const [state] = useAsync(() => getMenuList(id), [id]);
   const { loading, data: menuList, error } = state;
 
-  const { handleScript, transcript, listening, toggle, resetTranscript, init } =
-    usePayload();
+  const { handleScript, transcript, listening, toggle } = usePayload();
 
   const navigate = useNavigate();
   // menu set 되면 화면 전환
@@ -41,7 +40,7 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
     if (menuList && menuList.length > 0) {
       navigate('/menu');
     }
-  }, [menuList]);
+  }, [menuList, navigate]);
 
   useEffect(() => {
     setMenuList(menuList);

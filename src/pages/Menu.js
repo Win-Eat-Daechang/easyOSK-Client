@@ -17,12 +17,13 @@ import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
 import { useEffect } from 'react';
 
-const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
+const Menu = ({ shopInput, menuList, setMenuInput, menuInput, setBarcode }) => {
   const { handleScript, transcript, listening, toggle, init } = usePayload();
   const navigate = useNavigate();
 
   useEffect(() => {
     init();
+    // eslint-disable-next-line
   }, []);
 
   const handler = () => {
@@ -56,9 +57,9 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
             <br />
             <DefaultText> 메뉴를 말해주세요"</DefaultText>
           </LeftText>
-          {transcript && (
+          {menuInput && (
             <RightText>
-              "<RedText>{transcript}</RedText>"
+              "<RedText>{menuInput}</RedText>"
             </RightText>
           )}
         </SectionContainer>
