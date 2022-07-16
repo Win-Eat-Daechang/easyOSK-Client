@@ -12,10 +12,11 @@ import Mic from '../components/Home/Mic';
 import axios from 'axios';
 import useAsync from '../hooks/useAsync';
 
-import { useNavigate } from 'react-router-dom';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
 import { useEffect, useState } from 'react';
+
+import { useNavigate } from 'react-router-dom';
 
 async function getMenuList(id) {
   if (id !== 0) {
@@ -31,9 +32,17 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
   const [state] = useAsync(() => getMenuList(id), [id]);
   const { loading, data: menuList, error } = state;
 
-  const [handleScript, transcript, listening, toggle, resetTranscript] =
+  const { handleScript, transcript, listening, toggle, resetTranscript } =
     usePayload();
+
   const navigate = useNavigate();
+  // menu set 되면 화면 전환
+  useEffect(() => {
+    if (menuList && menuList.length > 0) {
+      resetTranscript();
+      navigate('/menu');
+    }
+  }, [menuList]);
 
   useEffect(() => {
     setMenuList(menuList);
@@ -48,9 +57,6 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
         setShopInput(name);
         // res에 해당하는 메뉴 정보 가져와서 set. id만 부여하면 자동으로 fetch
         setId(id);
-
-        // 다음 page로 navigate
-        navigate('/menu');
       });
     }
   };

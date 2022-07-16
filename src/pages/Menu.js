@@ -18,27 +18,27 @@ import speechParse from '../utils/speechParse';
 import { useEffect } from 'react';
 
 const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
-  const [handleScript, transcript, listening, toggle, resetTranscript] =
+  const { handleScript, transcript, listening, toggle, resetTranscript } =
     usePayload();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(transcript);
-  }, []);
+    console.log(menuList);
+    resetTranscript();
+  }, [resetTranscript]);
 
   const handler = () => {
     handleScript();
     // listening이 true일 때 애니메이션? 진동? 효과
     console.log(listening);
     if (!toggle) {
+      console.log(menuList);
       speechParse(menuList, transcript).then(function (res) {
+        console.log(res);
         setMenuInput(res);
 
         // barcode set
         // setBarcode()
-
-        // reset transcript
-        resetTranscript();
 
         // 다음 page로 navigate
         navigate('/result');
