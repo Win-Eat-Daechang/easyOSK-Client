@@ -32,14 +32,13 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
   const [state] = useAsync(() => getMenuList(id), [id]);
   const { loading, data: menuList, error } = state;
 
-  const { handleScript, transcript, listening, toggle, resetTranscript } =
+  const { handleScript, transcript, listening, toggle, resetTranscript, init } =
     usePayload();
 
   const navigate = useNavigate();
   // menu set 되면 화면 전환
   useEffect(() => {
     if (menuList && menuList.length > 0) {
-      resetTranscript();
       navigate('/menu');
     }
   }, [menuList]);

@@ -18,14 +18,12 @@ import speechParse from '../utils/speechParse';
 import { useEffect } from 'react';
 
 const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
-  const { handleScript, transcript, listening, toggle, resetTranscript } =
-    usePayload();
+  const { handleScript, transcript, listening, toggle, init } = usePayload();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(menuList);
-    resetTranscript();
-  }, [resetTranscript]);
+    init();
+  }, []);
 
   const handler = () => {
     handleScript();

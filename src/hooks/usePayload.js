@@ -7,6 +7,11 @@ function usePayload() {
   const { transcript, listening, resetTranscript } = useSpeechRecognition();
   const [toggle, setToggle] = useState(true);
 
+  const init = () => {
+    resetTranscript();
+    setToggle(true);
+  };
+
   const handleScript = () => {
     if (toggle) {
       // reset previous data first
@@ -21,7 +26,7 @@ function usePayload() {
     setToggle(!toggle);
   };
 
-  return { handleScript, transcript, listening, toggle, resetTranscript };
+  return { handleScript, transcript, listening, toggle, resetTranscript, init };
 }
 
 export default usePayload;
