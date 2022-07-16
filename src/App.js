@@ -25,6 +25,8 @@ const App = () => {
   const [shopInput, setShopInput] = useState(initialState);
 
   const [menuList, setMenuList] = useState([]);
+
+  // menuInput = 유저가 선택한 메뉴
   const [menuInput, setMenuInput] = useState(initialState);
 
   const [barcode, setBarcode] = useState(initialState);
@@ -40,10 +42,9 @@ const App = () => {
               path="/"
               element={
                 <Home
-                  shopInput={shopInput}
                   shopList={shopList}
                   setShopInput={setShopInput}
-                  setMenusInShop={setMenuList}
+                  setMenuList={setMenuList}
                 />
               }
             />

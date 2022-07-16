@@ -15,15 +15,17 @@ import useAsync from '../hooks/useAsync';
 import { useNavigate } from 'react-router-dom';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 async function getMenuList(id) {
-  const response = await axios.get(`https://www.piuda.cf/stores/${id}`);
-  console.log(response.data);
-  return response.data;
+  if (id !== 0) {
+    const response = await axios.get(`https://www.piuda.cf/stores/${id}`);
+    console.log(response);
+    return response.data;
+  }
 }
 
-const Home = ({ shopList, setShopInput, setMenusInShop: setMenuList }) => {
+const Home = ({ shopList, setShopInput, setMenuList }) => {
   // get menu list, api call, id가 바뀔때마다 api call.
   const [id, setId] = useState(0);
   const [state] = useAsync(() => getMenuList(id), [id]);
@@ -33,19 +35,19 @@ const Home = ({ shopList, setShopInput, setMenusInShop: setMenuList }) => {
     usePayload();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setMenuList(menuList);
+  }, [menuList, setMenuList]);
+
   const handler = () => {
     handleScript();
-
     // listening이 true일 때 애니메이션? 진동? 효과
     console.log(listening);
     if (!toggle) {
-      speechParse(shopList, transcript).then(function (res) {
-        setShopInput(res);
+      speechParse(shopList, transcript).then(function ({ name, id }) {
+        setShopInput(name);
         // res에 해당하는 메뉴 정보 가져와서 set. id만 부여하면 자동으로 fetch
-        setId(1);
-
-        // reset transcript
-        resetTranscript();
+        setId(id);
 
         // 다음 page로 navigate
         navigate('/menu');
@@ -71,6 +73,16 @@ const Home = ({ shopList, setShopInput, setMenusInShop: setMenuList }) => {
           )}
         </SectionContainer>
       </div>
+      {loading ?? (
+        <div>
+          <span>loading</span>
+        </div>
+      )}
+      {error ?? (
+        <div>
+          <span>{error}</span>
+        </div>
+      )}
       <MicContainer onClick={handler}>
         <Mic />
       </MicContainer>
