@@ -15,16 +15,48 @@ import Mic from '../components/Home/Mic';
 import { useNavigate } from 'react-router-dom';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import useAsync from '../hooks/useAsync';
 
-const Menu = ({ shopInput, menuList, setMenuInput, menuInput, setBarcode }) => {
+import axios from 'axios';
+
+async function getBarcode(storeId, menuId) {
+  // https://www.piuda.cf/code?store=버거킹&menu=갈릭불고기와퍼세트
+
+  if (menuId !== undefined && menuId !== 0) {
+    const response = await axios.get(
+      `https://www.piuda.cf/code?store=${storeId}&menu=${menuId}`
+    );
+    console.log(response);
+    return response.data;
+  }
+}
+
+const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
+  // get menu list, api call, id가 바뀔때마다 api call.
+  const [menuId, setMenuId] = useState(0);
+  const [state] = useAsync(() => getBarcode(menuId), [menuId]);
+  const { loading, data: barcode } = state;
+
   const { handleScript, transcript, listening, toggle, init } = usePayload();
-  const navigate = useNavigate();
 
+  // transcript 지우기
   useEffect(() => {
     init();
     // eslint-disable-next-line
   }, []);
+
+  // barcode fetch하면 result page로 navigate
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (barcode && barcode.length > 0) {
+      navigate('/result');
+    }
+  }, [barcode, navigate]);
+
+  useEffect(() => {
+    setBarcode(barcode);
+  }, [barcode, setBarcode]);
 
   const handler = () => {
     handleScript();
@@ -32,15 +64,11 @@ const Menu = ({ shopInput, menuList, setMenuInput, menuInput, setBarcode }) => {
     console.log(listening);
     if (!toggle) {
       console.log(menuList);
-      speechParse(menuList, transcript).then(function (res) {
-        console.log(res);
-        setMenuInput(res);
+      speechParse(menuList, transcript).then(function ({ name, id }) {
+        setMenuInput(name);
 
-        // barcode set
-        // setBarcode()
-
-        // 다음 page로 navigate
-        navigate('/result');
+        // set menuId, fetch barcode
+        setMenuId(id);
       });
     }
   };
@@ -57,13 +85,19 @@ const Menu = ({ shopInput, menuList, setMenuInput, menuInput, setBarcode }) => {
             <br />
             <DefaultText> 메뉴를 말해주세요"</DefaultText>
           </LeftText>
-          {menuInput && (
+          {transcript && (
             <RightText>
-              "<RedText>{menuInput}</RedText>"
+              "<RedText>{transcript}</RedText>"
             </RightText>
           )}
         </SectionContainer>
       </div>
+      {loading ?? (
+        <div>
+          <span>loading</span>
+        </div>
+      )}
+
       <MicContainer onClick={handler}>
         <Mic />
       </MicContainer>

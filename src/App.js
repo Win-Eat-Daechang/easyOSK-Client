@@ -55,7 +55,6 @@ const App = () => {
               <Menu
                 shopInput={shopInput}
                 menuList={menuList}
-                menuInput={menuInput}
                 setMenuInput={setMenuInput}
                 setBarcode={setBarcode}
               />

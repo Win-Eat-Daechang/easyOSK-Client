@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 async function getMenuList(id) {
-  if (id !== 0) {
+  if (id !== undefined && id !== 0) {
     const response = await axios.get(`https://www.piuda.cf/stores/${id}`);
     console.log(response);
     return response.data;
@@ -30,7 +30,7 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
   // get menu list, api call, id가 바뀔때마다 api call.
   const [id, setId] = useState(0);
   const [state] = useAsync(() => getMenuList(id), [id]);
-  const { loading, data: menuList, error } = state;
+  const { loading, data: menuList } = state;
 
   const { handleScript, transcript, listening, toggle } = usePayload();
 
@@ -80,11 +80,6 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
       {loading ?? (
         <div>
           <span>loading</span>
-        </div>
-      )}
-      {error ?? (
-        <div>
-          <span>{error}</span>
         </div>
       )}
       <MicContainer onClick={handler}>
