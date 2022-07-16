@@ -7,8 +7,14 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
+import { useEffect } from 'react';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
+  // 받아온 바코드숫자로 바코드 생성
+  useEffect(() => {
+    console.log(barcode);
+  }, []);
+
   return (
     <ResultContainer>
       <div>
