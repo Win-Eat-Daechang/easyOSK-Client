@@ -7,25 +7,23 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-import { useEffect } from 'react';
+import Barcode from 'react-barcode';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
-  // 받아온 바코드숫자로 바코드 생성
-  useEffect(() => {
-    console.log(barcode);
-  }, []);
-
   return (
     <ResultContainer>
       <div>
         <HeaderContainer text={'바코드 생성 결과'} />
         <SectionContainer style={{ marginTop: '64px' }}>
           <LeftText>
-            <DefaultText>"{shopInput}</DefaultText>
+            <DefaultText>"{shopInput.name}</DefaultText>
             <br />
             <DefaultText> {menuInput}"</DefaultText>
           </LeftText>
         </SectionContainer>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Barcode value="6650515786883629" width="2" />
       </div>
       <MicContainer>
         <Mic />
@@ -39,7 +37,7 @@ const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 100%;
   height: 100%;
 `;

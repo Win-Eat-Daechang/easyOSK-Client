@@ -16,7 +16,7 @@ async function getShopList() {
 }
 
 const App = () => {
-  const initialState = '';
+  const initialState = { name: '', id: 0 };
   // get shoplist, api call
   const [state] = useAsync(getShopList, [], false);
   const { data: shopList, error } = state;
@@ -83,7 +83,6 @@ export default App;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
 
   width: 100vw;
   height: 100vh;

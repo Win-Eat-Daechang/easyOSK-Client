@@ -27,7 +27,7 @@ async function getBarcode(storeId, menuId) {
     const response = await axios.get(
       `https://www.piuda.cf/code?store=${storeId}&menu=${menuId}`
     );
-    console.log(response);
+    console.log(response.data);
     return response.data;
   }
 }
@@ -35,10 +35,10 @@ async function getBarcode(storeId, menuId) {
 const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
   // get menu list, api call, id가 바뀔때마다 api call.
   const [menuId, setMenuId] = useState(0);
-  const [state] = useAsync(() => getBarcode(menuId), [menuId]);
+  const [state] = useAsync(() => getBarcode(shopInput.id, menuId), [menuId]);
   const { loading, data: barcode } = state;
 
-  const { handleScript, transcript, listening, toggle, init } = usePayload();
+  const { handleScript, transcript, toggle, init } = usePayload();
 
   // transcript 지우기
   useEffect(() => {
@@ -49,19 +49,26 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
   // barcode fetch하면 result page로 navigate
   const navigate = useNavigate();
   useEffect(() => {
-    if (barcode && barcode.length > 0) {
+    if (barcode) {
       navigate('/result');
     }
   }, [barcode, navigate]);
 
   useEffect(() => {
-    setBarcode(barcode);
-  }, [barcode, setBarcode]);
+    if (barcode) {
+      const result = {
+        ...barcode,
+        id: menuId,
+      };
+      console.log(result);
+      setBarcode(result);
+    }
+  }, [barcode, setBarcode, menuId]);
 
   const handler = () => {
     handleScript();
     // listening이 true일 때 애니메이션? 진동? 효과
-    console.log(listening);
+    // console.log(listening);
     if (!toggle) {
       console.log(menuList);
       speechParse(menuList, transcript).then(function ({ name, id }) {
@@ -80,7 +87,7 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
         <SectionContainer style={{ marginTop: '64px' }}>
           <LeftText>
             <DefaultText>
-              "<RedText>{shopInput}</RedText>에서 이용할
+              "<RedText>{shopInput.name}</RedText>에서 이용할
             </DefaultText>
             <br />
             <DefaultText> 메뉴를 말해주세요"</DefaultText>
@@ -110,7 +117,7 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 100%;
   height: 100%;
 `;

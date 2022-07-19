@@ -32,7 +32,7 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   width: 100%;
   height: 100%;
 `;

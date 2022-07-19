@@ -52,7 +52,7 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
     console.log(listening);
     if (!toggle) {
       speechParse(shopList, transcript).then(function ({ name, id }) {
-        setShopInput(name);
+        setShopInput({ name, id });
         // res에 해당하는 메뉴 정보 가져와서 set. id만 부여하면 자동으로 fetch
         setId(id);
       });
@@ -94,7 +94,7 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid red;
+
   width: 100%;
   height: 100%;
 `;
