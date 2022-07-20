@@ -17,6 +17,7 @@ import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
 import { useState, useEffect } from 'react';
 import useAsync from '../hooks/useAsync';
+import useSpeak from '../hooks/useSpeak';
 
 import axios from 'axios';
 
@@ -53,6 +54,12 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
       navigate('/result');
     }
   }, [barcode, navigate]);
+
+  const setValue = useSpeak();
+  useEffect(() => {
+    console.log('set value');
+    setValue(() => '이용할 메뉴를 화면 중앙의 버튼을 누르고 말해 주세요');
+  }, []);
 
   useEffect(() => {
     if (barcode) {

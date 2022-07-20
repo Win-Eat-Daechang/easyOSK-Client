@@ -7,8 +7,16 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
+import { useEffect } from 'react';
+import useSpeak from '../hooks/useSpeak';
 
 const Offline = () => {
+  const setValue = useSpeak();
+  useEffect(() => {
+    console.log('set value');
+    setValue(() => '네트워크 연결을 확인해 주세요');
+  }, []);
+
   return (
     <HomeContainer>
       <div>
