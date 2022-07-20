@@ -17,6 +17,7 @@ import speechParse from '../utils/speechParse';
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import useSpeak from '../hooks/useSpeak';
 
 async function getMenuList(id) {
   if (id !== undefined && id !== 0) {
@@ -45,6 +46,12 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
   useEffect(() => {
     setMenuList(menuList);
   }, [menuList, setMenuList]);
+
+  const setValue = useSpeak();
+  useEffect(() => {
+    console.log('set value');
+    setValue(() => '이용할 매장을 화면 중앙의 버튼을 누르고 말해 주세요');
+  }, []);
 
   const handler = () => {
     handleScript();
