@@ -17,7 +17,7 @@ import speechParse from '../utils/speechParse';
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import useSpeak from '../hooks/useSpeak';
+//import useSpeak from '../hooks/useSpeak';
 
 async function getMenuList(id) {
   if (id !== undefined && id !== 0) {

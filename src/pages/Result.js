@@ -8,7 +8,7 @@ import {
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
 import Barcode from 'react-barcode';
-import useSpeak from '../hooks/useSpeak';
+//import useSpeak from '../hooks/useSpeak';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 

@@ -8,7 +8,7 @@ import {
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
 import { useEffect } from 'react';
-import useSpeak from '../hooks/useSpeak';
+//import useSpeak from '../hooks/useSpeak';
 
 const Offline = () => {
   // const setValue = useSpeak();
