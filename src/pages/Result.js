@@ -20,6 +20,9 @@ const Result = ({ shopInput, menuInput, barcode }) => {
   const test = JSON.stringify(barcode.barcode);
   const test1 = JSON.stringify(shopInput.name);
 
+  console.log(test);
+  console.log(test1);
+
   // const setValue = useSpeak();
   // useEffect(() => {
   //   console.log('set value');
@@ -31,7 +34,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
   const navigate = useNavigate();
   // menu set 되면 화면 전환
   useEffect(() => {
-    if (!barcode.id) {
+    if (barcode.id === 0) {
       navigate('/home');
     }
   }, [barcode, navigate]);
@@ -45,7 +48,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
             <LeftText>
               <DefaultText>{shopInput.name}</DefaultText>
               <br />
-              <DefaultText>{menuInput}</DefaultText>
+              <DefaultText>{menuInput.name}</DefaultText>
             </LeftText>
           ) : (
             <span>menu 없음</span>
