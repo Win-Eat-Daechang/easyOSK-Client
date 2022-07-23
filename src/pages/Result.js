@@ -20,6 +20,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
   console.log(menuInput);
   const test1 = JSON.stringify(shopInput.name);
   console.log(test1);
+  console.log(menuInput);
 
   // const setValue = useSpeak();
   // useEffect(() => {
@@ -42,15 +43,15 @@ const Result = ({ shopInput, menuInput, barcode }) => {
       <div>
         <HeaderContainer text={'바코드 생성 결과'} />
         <SectionContainer style={{ marginTop: '64px' }}>
-          {/* {test1 ? (
+          {test1 ? (
             <LeftText>
-              <DefaultText>"{test1}</DefaultText>
+              <DefaultText>{shopInput.name}</DefaultText>
               <br />
-              <DefaultText> {menuInput}"</DefaultText>
+              <DefaultText>"{menuInput.name}"</DefaultText>
             </LeftText>
           ) : (
-            <span>hh</span>
-          )} */}
+            <span>menu 없음</span>
+          )}
         </SectionContainer>
       </div>
 
