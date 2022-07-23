@@ -55,11 +55,11 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
     }
   }, [barcode, navigate]);
 
-  const setValue = useSpeak();
-  useEffect(() => {
-    console.log('set value');
-    setValue(() => '이용할 메뉴를 화면 중앙의 버튼을 누르고 말해 주세요');
-  }, []);
+  // const setValue = useSpeak();
+  // useEffect(() => {
+  //   console.log('set value');
+  //   setValue(() => '이용할 메뉴를 화면 중앙의 버튼을 누르고 말해 주세요');
+  // }, [setValue]);
 
   useEffect(() => {
     if (barcode) {

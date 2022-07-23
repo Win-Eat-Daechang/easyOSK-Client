@@ -11,11 +11,11 @@ import { useEffect } from 'react';
 import useSpeak from '../hooks/useSpeak';
 
 const Offline = () => {
-  const setValue = useSpeak();
-  useEffect(() => {
-    console.log('set value');
-    setValue(() => '네트워크 연결을 확인해 주세요');
-  }, []);
+  // const setValue = useSpeak();
+  // useEffect(() => {
+  //   console.log('set value');
+  //   setValue(() => '네트워크 연결을 확인해 주세요');
+  // }, [setValue]);
 
   return (
     <HomeContainer>

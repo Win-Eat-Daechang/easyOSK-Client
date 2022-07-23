@@ -8,7 +8,7 @@ function useSpeak() {
   useEffect(() => {
     console.log('speak: ', value);
     speak({ text: value });
-  }, [value]);
+  }, [value, speak]);
 
   return setValue;
 }

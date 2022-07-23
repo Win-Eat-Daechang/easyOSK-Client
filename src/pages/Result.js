@@ -12,13 +12,13 @@ import useSpeak from '../hooks/useSpeak';
 import { useEffect } from 'react';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
-  const setValue = useSpeak();
-  useEffect(() => {
-    console.log('set value');
-    setValue(
-      () => '바코드가 생성되었습니다. 키오스크에 바코드를 인식해 주세요.'
-    );
-  }, []);
+  // const setValue = useSpeak();
+  // useEffect(() => {
+  //   console.log('set value');
+  //   setValue(
+  //     () => '바코드가 생성되었습니다. 키오스크에 바코드를 인식해 주세요.'
+  //   );
+  // }, [setValue]);
   return (
     <ResultContainer>
       <div>
