@@ -13,14 +13,12 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
+  console.log(shopInput);
+  console.log(menuInput);
   console.log(barcode);
-  const test = JSON.stringify(barcode.barcode);
-  console.log(test);
 
-  console.log(menuInput);
+  const test = JSON.stringify(barcode.barcode);
   const test1 = JSON.stringify(shopInput.name);
-  console.log(test1);
-  console.log(menuInput);
 
   // const setValue = useSpeak();
   // useEffect(() => {
@@ -47,7 +45,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
             <LeftText>
               <DefaultText>{shopInput.name}</DefaultText>
               <br />
-              <DefaultText>"{menuInput.name}"</DefaultText>
+              <DefaultText>{menuInput}</DefaultText>
             </LeftText>
           ) : (
             <span>menu 없음</span>
