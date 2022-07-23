@@ -13,6 +13,14 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
+  console.log(barcode);
+  const test = JSON.stringify(barcode.barcode);
+  console.log(test);
+
+  console.log(menuInput);
+  const test1 = JSON.stringify(shopInput.name);
+  console.log(test1);
+
   // const setValue = useSpeak();
   // useEffect(() => {
   //   console.log('set value');
@@ -24,7 +32,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
   const navigate = useNavigate();
   // menu set 되면 화면 전환
   useEffect(() => {
-    if (!barcode) {
+    if (!barcode.id) {
       navigate('/home');
     }
   }, [barcode, navigate]);
@@ -34,19 +42,24 @@ const Result = ({ shopInput, menuInput, barcode }) => {
       <div>
         <HeaderContainer text={'바코드 생성 결과'} />
         <SectionContainer style={{ marginTop: '64px' }}>
-          <LeftText>
-            <DefaultText>"{shopInput.name}</DefaultText>
-            <br />
-            <DefaultText> {menuInput}"</DefaultText>
-          </LeftText>
+          {/* {test1 ? (
+            <LeftText>
+              <DefaultText>"{test1}</DefaultText>
+              <br />
+              <DefaultText> {menuInput}"</DefaultText>
+            </LeftText>
+          ) : (
+            <span>hh</span>
+          )} */}
         </SectionContainer>
       </div>
-      {barcode.id ? (
+
+      {test !== '' ? (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Barcode value={barcode.barcode} width="2" />
+          <Barcode value={test} width="2" />
         </div>
       ) : (
-        <></>
+        <span>hi</span>
       )}
       <MicContainer>
         <Mic />
