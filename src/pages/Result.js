@@ -13,14 +13,15 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
+  console.log(shopInput);
+  console.log(menuInput);
   console.log(barcode);
-  const test = JSON.stringify(barcode.barcode);
-  console.log(test);
 
-  console.log(menuInput);
+  const test = JSON.stringify(barcode.barcode);
   const test1 = JSON.stringify(shopInput.name);
+
+  console.log(test);
   console.log(test1);
-  console.log(menuInput);
 
   // const setValue = useSpeak();
   // useEffect(() => {
@@ -33,7 +34,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
   const navigate = useNavigate();
   // menu set 되면 화면 전환
   useEffect(() => {
-    if (!barcode.id) {
+    if (barcode.id === 0) {
       navigate('/home');
     }
   }, [barcode, navigate]);
@@ -47,7 +48,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
             <LeftText>
               <DefaultText>{shopInput.name}</DefaultText>
               <br />
-              <DefaultText>"{menuInput.name}"</DefaultText>
+              <DefaultText>{menuInput.name}</DefaultText>
             </LeftText>
           ) : (
             <span>menu 없음</span>
