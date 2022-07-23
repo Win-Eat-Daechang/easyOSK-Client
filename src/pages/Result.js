@@ -10,6 +10,7 @@ import Mic from '../components/Home/Mic';
 import Barcode from 'react-barcode';
 import useSpeak from '../hooks/useSpeak';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
   // const setValue = useSpeak();
@@ -19,6 +20,15 @@ const Result = ({ shopInput, menuInput, barcode }) => {
   //     () => '바코드가 생성되었습니다. 키오스크에 바코드를 인식해 주세요.'
   //   );
   // }, [setValue]);
+
+  const navigate = useNavigate();
+  // menu set 되면 화면 전환
+  useEffect(() => {
+    if (!barcode) {
+      navigate('/home');
+    }
+  }, [barcode, navigate]);
+
   return (
     <ResultContainer>
       <div>
@@ -31,9 +41,13 @@ const Result = ({ shopInput, menuInput, barcode }) => {
           </LeftText>
         </SectionContainer>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Barcode value="6650515786883629" width="2" />
-      </div>
+      {barcode.id ? (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Barcode value={barcode.barcode} width="2" />
+        </div>
+      ) : (
+        <></>
+      )}
       <MicContainer>
         <Mic />
       </MicContainer>
