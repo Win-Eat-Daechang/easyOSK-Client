@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 import {
   DefaultText,
   HeaderContainer,
@@ -8,16 +8,15 @@ import {
   RightText,
   SectionContainer,
 } from '../components/Shared/components';
-import Mic from '../components/Home/Mic';
-import axios from 'axios';
 import useAsync from '../hooks/useAsync';
-
+//import useSpeak from '../hooks/useSpeak';
 import usePayload from '../hooks/usePayload';
+import Mic from '../components/Home/Mic';
 import speechParse from '../utils/speechParse';
-import { useEffect, useState } from 'react';
 
+import axios from 'axios';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import useSpeak from '../hooks/useSpeak';
 
 async function getMenuList(id) {
   if (id !== undefined && id !== 0) {
@@ -47,11 +46,13 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
     setMenuList(menuList);
   }, [menuList, setMenuList]);
 
-  // const setValue = useSpeak();
-  // useEffect(() => {
-  //   console.log('set value');
-  //   setValue(() => '이용할 매장을 화면 중앙의 버튼을 누르고 말해 주세요');
-  // }, [setValue]);
+  /*
+  const setValue = useSpeak();
+  useEffect(() => {
+    console.log('set value');
+    setValue(() => '이용할 매장을 화면 중앙의 버튼을 누르고 말해 주세요');
+  }, [setValue]);
+  */
 
   const handler = () => {
     handleScript();

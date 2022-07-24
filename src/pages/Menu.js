@@ -1,6 +1,4 @@
-//Home 페이지에서 매장 선택
-// import { useState } from 'react';
-import styled from 'styled-components';
+import { useState, useEffect } from 'react';
 import {
   DefaultText,
   HeaderContainer,
@@ -11,15 +9,14 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-
-import { useNavigate } from 'react-router-dom';
+import useAsync from '../hooks/useAsync';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
-import { useState, useEffect } from 'react';
-import useAsync from '../hooks/useAsync';
-import useSpeak from '../hooks/useSpeak';
+//import useSpeak from '../hooks/useSpeak';
 
 import axios from 'axios';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 async function getBarcode(storeId, menuId) {
   // https://www.piuda.cf/code?store=버거킹&menu=갈릭불고기와퍼세트
@@ -55,11 +52,13 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
     }
   }, [barcode, navigate]);
 
-  // const setValue = useSpeak();
-  // useEffect(() => {
-  //   console.log('set value');
-  //   setValue(() => '이용할 메뉴를 화면 중앙의 버튼을 누르고 말해 주세요');
-  // }, [setValue]);
+  /*
+  const setValue = useSpeak();
+  useEffect(() => {
+    console.log('set value');
+    setValue(() => '이용할 메뉴를 화면 중앙의 버튼을 누르고 말해 주세요');
+  }, [setValue]);
+  */
 
   useEffect(() => {
     if (barcode) {
@@ -74,13 +73,10 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
 
   const handler = () => {
     handleScript();
-    // listening이 true일 때 애니메이션? 진동? 효과
-    // console.log(listening);
+    // listening이 true일 때 애니메이션-진동 효과?
     if (!toggle) {
-      console.log(menuList);
       speechParse(menuList, transcript).then(function ({ name, id }) {
         setMenuInput(name);
-
         // set menuId, fetch barcode
         setMenuId(id);
       });
@@ -111,7 +107,6 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
           <span>loading</span>
         </div>
       )}
-
       <MicContainer onClick={handler}>
         <Mic />
       </MicContainer>

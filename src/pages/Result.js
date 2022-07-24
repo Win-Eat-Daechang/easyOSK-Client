@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { useEffect } from 'react';
 import {
   DefaultText,
   HeaderContainer,
@@ -7,9 +7,10 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
+//import useSpeak from '../hooks/useSpeak';
+
 import Barcode from 'react-barcode';
-import useSpeak from '../hooks/useSpeak';
-import { useEffect } from 'react';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
@@ -23,13 +24,15 @@ const Result = ({ shopInput, menuInput, barcode }) => {
   console.log(test);
   console.log(test1);
 
-  // const setValue = useSpeak();
-  // useEffect(() => {
-  //   console.log('set value');
-  //   setValue(
-  //     () => '바코드가 생성되었습니다. 키오스크에 바코드를 인식해 주세요.'
-  //   );
-  // }, [setValue]);
+  /*
+  const setValue = useSpeak();
+  useEffect(() => {
+    console.log('set value');
+    setValue(
+      () => '바코드가 생성되었습니다. 키오스크에 바코드를 인식해 주세요.'
+    );
+  }, [setValue]);
+  */
 
   const navigate = useNavigate();
   // menu set 되면 화면 전환
