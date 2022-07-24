@@ -11,7 +11,7 @@ import Offline from './pages/Offline';
 
 async function getShopList() {
   const response = await axios.get('https://www.piuda.cf/stores');
-  console.log(response.data);
+  // console.log(response.data);
   return response.data;
 }
 

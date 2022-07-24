@@ -17,7 +17,7 @@ import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
 import { useState, useEffect } from 'react';
 import useAsync from '../hooks/useAsync';
-import useSpeak from '../hooks/useSpeak';
+// import useSpeak from '../hooks/useSpeak';
 
 import axios from 'axios';
 
@@ -28,7 +28,7 @@ async function getBarcode(storeId, menuId) {
     const response = await axios.get(
       `https://www.piuda.cf/code?store=${storeId}&menu=${menuId}`
     );
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   }
 }
@@ -67,7 +67,7 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
         ...barcode,
         id: menuId,
       };
-      console.log(result);
+      // console.log(result);
       setBarcode(result);
     }
   }, [barcode, setBarcode, menuId]);
@@ -77,7 +77,7 @@ const Menu = ({ shopInput, menuList, setMenuInput, setBarcode }) => {
     // listening이 true일 때 애니메이션? 진동? 효과
     // console.log(listening);
     if (!toggle) {
-      console.log(menuList);
+      // console.log(menuList);
       speechParse(menuList, transcript).then(function ({ name, id }) {
         setMenuInput(name);
 

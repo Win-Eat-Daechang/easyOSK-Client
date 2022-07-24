@@ -8,20 +8,19 @@ import {
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
 import Barcode from 'react-barcode';
-import useSpeak from '../hooks/useSpeak';
+// import useSpeak from '../hooks/useSpeak';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Result = ({ shopInput, menuInput, barcode }) => {
-  console.log(shopInput);
-  console.log(menuInput);
-  console.log(barcode);
+  // console.log(shopInput);
+  // console.log(menuInput);
+  // console.log(barcode);
 
-  const test = JSON.stringify(barcode.barcode);
-  const test1 = JSON.stringify(shopInput.name);
+  const test = parseInt(barcode.barcode);
+  const test1 = shopInput.name;
 
-  console.log(test);
-  console.log(test1);
+  // console.log(test1);
 
   // const setValue = useSpeak();
   // useEffect(() => {
@@ -48,7 +47,7 @@ const Result = ({ shopInput, menuInput, barcode }) => {
             <LeftText>
               <DefaultText>{shopInput.name}</DefaultText>
               <br />
-              <DefaultText>{menuInput.name}</DefaultText>
+              <DefaultText>{menuInput}</DefaultText>
             </LeftText>
           ) : (
             <span>menu 없음</span>
@@ -56,9 +55,9 @@ const Result = ({ shopInput, menuInput, barcode }) => {
         </SectionContainer>
       </div>
 
-      {test !== '' ? (
+      {test ? (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Barcode value={test} width="2" />
+          <Barcode value={barcode.barcode} width={2} />
         </div>
       ) : (
         <span>hi</span>

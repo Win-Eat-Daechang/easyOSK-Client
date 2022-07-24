@@ -17,12 +17,12 @@ import speechParse from '../utils/speechParse';
 import { useEffect, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
-import useSpeak from '../hooks/useSpeak';
+// import useSpeak from '../hooks/useSpeak';
 
 async function getMenuList(id) {
   if (id !== undefined && id !== 0) {
     const response = await axios.get(`https://www.piuda.cf/stores/${id}`);
-    console.log(response);
+    // console.log(response);
     return response.data;
   }
 }
@@ -33,7 +33,7 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
   const [state] = useAsync(() => getMenuList(id), [id]);
   const { loading, data: menuList } = state;
 
-  const { handleScript, transcript, listening, toggle } = usePayload();
+  const { handleScript, transcript, toggle } = usePayload();
 
   const navigate = useNavigate();
   // menu set 되면 화면 전환
@@ -56,7 +56,7 @@ const Home = ({ shopList, setShopInput, setMenuList }) => {
   const handler = () => {
     handleScript();
     // listening이 true일 때 애니메이션? 진동? 효과
-    console.log(listening);
+    // console.log(listening);
     if (!toggle) {
       speechParse(shopList, transcript).then(function ({ name, id }) {
         setShopInput({ name, id });
