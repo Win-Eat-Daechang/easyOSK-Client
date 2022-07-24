@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+// import { useEffect } from 'react';
 import {
   DefaultText,
   HeaderContainer,
@@ -7,16 +7,18 @@ import {
   SectionContainer,
 } from '../components/Shared/components';
 import Mic from '../components/Home/Mic';
-// import { useEffect } from 'react';
-// import useSpeak from '../hooks/useSpeak';
+//import useSpeak from '../hooks/useSpeak';
+
+import styled from 'styled-components';
 
 const Offline = () => {
-  // const setValue = useSpeak();
-  // useEffect(() => {
-  //   console.log('set value');
-  //   setValue(() => '네트워크 연결을 확인해 주세요');
-  // }, [setValue]);
-
+  /*
+  const setValue = useSpeak();
+  useEffect(() => {
+    console.log('set value');
+    setValue(() => '네트워크 연결을 확인해 주세요');
+  }, [setValue]);
+  */
   return (
     <HomeContainer>
       <div>
@@ -40,7 +42,6 @@ const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* border: 1px solid red; */
   width: 100%;
   height: 100%;
 `;

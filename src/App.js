@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
-import Account from './pages/Account';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
 import Result from './pages/Result';
@@ -70,7 +69,6 @@ const App = () => {
               />
             }
           />
-          <Route path="/account" element={<Account />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
