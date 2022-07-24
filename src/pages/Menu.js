@@ -12,8 +12,6 @@ import Mic from '../components/Home/Mic';
 import useAsync from '../hooks/useAsync';
 import usePayload from '../hooks/usePayload';
 import speechParse from '../utils/speechParse';
-import { useState, useEffect } from 'react';
-import useAsync from '../hooks/useAsync';
 // import useSpeak from '../hooks/useSpeak';
 
 import axios from 'axios';
